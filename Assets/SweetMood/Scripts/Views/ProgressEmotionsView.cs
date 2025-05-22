@@ -1,15 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+using Cysharp.Threading.Tasks;
 using TMPro;
+using DG.Tweening;
 
 public class ProgressEmotionsView : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private float _durationChangingProgressionEmotions;
+    [Header("UI")]
     [SerializeField] private Slider _progressEmotions;
     [SerializeField] private TextMeshProUGUI _numberEmotions;
 
     public void UpdateProgressEmotions(int value)
-        => _progressEmotions.value = value;
+        => DOTween.To(value => _progressEmotions.value = value, _progressEmotions.value, value, _durationChangingProgressionEmotions);
 
     private void Start()
     {
